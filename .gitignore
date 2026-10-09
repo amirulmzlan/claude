@@ -1,1 +1,4 @@
 node_modules/
+edit/cards/out/
+__pycache__/
+renders/

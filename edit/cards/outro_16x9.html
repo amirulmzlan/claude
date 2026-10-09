@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ms">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=1920, height=1080" />
+<script src="./gsap.min.js"></script><style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: transparent; }
+#root { position: relative; width: 100%; height: 100%; font-family: "Inter Display", Inter, sans-serif; }
+.shade { position: absolute; left: 0; right: 0; bottom: 0; height: 75%;
+  background: linear-gradient(to top, rgba(6,10,24,.92), rgba(6,10,24,.65) 40%, rgba(6,10,24,0)); }
+.stack { position: absolute; left: 96px; right: auto; top: 52%; display: flex; flex-direction: column;
+  align-items: flex-start; text-align: left; }
+.mask { overflow: hidden; padding: 0 20px; }
+.kicker { color: #dfe3ea; font-weight: 600; font-size: 38px; letter-spacing: .42em; }
+.big { color: #fff; font-weight: 900; font-size: 180px; line-height: .95; letter-spacing: -.02em;
+  text-shadow: 0 6px 30px rgba(0,0,0,.45); }
+.tartan { height: 32px; width: 640px; margin: 16px 0; transform-origin: left center; border-radius: 3px;
+  background:
+    linear-gradient(90deg, transparent 0 18px, rgba(255,206,0,.95) 18px 21px, transparent 21px) 0 0 / 64px 100%,
+    linear-gradient(0deg, transparent 0 9px, rgba(255,206,0,.9) 9px 11px, transparent 11px) 0 0 / 100% 32px,
+    linear-gradient(90deg, rgba(8,30,70,.75) 0 12px, transparent 12px 40px, rgba(10,60,30,.7) 40px 52px, transparent 52px) 0 0 / 64px 100%,
+    linear-gradient(0deg, rgba(8,30,70,.55) 0 6px, transparent 6px 20px, rgba(10,60,30,.5) 20px 26px, transparent 26px) 0 0 / 100% 32px,
+    #c8102e; box-shadow: 0 4px 18px rgba(0,0,0,.4); }
+.sub { color: #f2f2f2; font-weight: 600; font-size: 40px; letter-spacing: .04em; }
+.sub b { color: #ff3b4f; font-weight: 800; }
+.pills { display: flex; gap: 26px; margin-top: 34px; }
+.pill { font-weight: 900; font-size: 34px; letter-spacing: .06em; color: #fff; padding: .45em 1em;
+  border-radius: 999px; background: #c8102e; box-shadow: 0 6px 22px rgba(200,16,46,.45); }
+.pill.alt { background: #fff; color: #0b1530; box-shadow: 0 6px 22px rgba(0,0,0,.35); }
+</style></head>
+<body>
+<div id="root" data-composition-id="outro_16x9" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+
+<div class="shade clip" id="shade" data-start="0" data-duration="6"></div>
+<div class="stack">
+  <div class="tartan" id="t"></div>
+  <div class="mask"><div class="big" id="b" style="font-size:118px">TERIMA KASIH!</div></div>
+  <div class="mask"><div class="sub" id="s">Sudah tonton sampai habis? Jangan lupa:</div></div>
+  <div class="pills"><div class="pill">LIKE</div><div class="pill alt">KOMEN</div><div class="pill">SUBSCRIBE</div></div>
+</div>
+
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+
+tl.fromTo("#shade", {opacity: 0}, {opacity: 1, duration: .6}, 0);
+tl.fromTo("#t", {scaleX: 0}, {scaleX: 1, duration: .55, ease: "power3.out"}, .1);
+tl.fromTo("#b", {y: 200}, {y: 0, duration: .7, ease: "expo.out"}, .3);
+tl.fromTo("#s", {y: 50, opacity: 0}, {y: 0, opacity: 1, duration: .5, ease: "power3.out"}, .7);
+document.querySelectorAll(".pill").forEach((p, i) => {
+  tl.fromTo(p, {scale: 0, opacity: 0}, {scale: 1, opacity: 1, duration: .45, ease: "back.out(2.2)"}, 1.0 + i * .18);
+});
+
+window.__timelines["outro_16x9"] = tl;
+tl.seek(0);
+</script>
+</body></html>
